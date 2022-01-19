@@ -15,15 +15,18 @@ namespace Server
         private IListener _listener;
         private IRequestHandler _requestHandler;
         private ConcurrentBag<Task> _clientHandlers;
-        public Server(int port)
+        public Server(IListener listener, IRequestHandler requestHandler)
         {
+            _listener = listener;
+            _requestHandler = requestHandler;
             _clientHandlers = new ConcurrentBag<Task>();
-            _listener.Open(IP, port);
         }
 
-        public async Task RunServer(CancellationToken token)
+        public async Task RunServer(int port, CancellationToken token)
         {
-            foreach (IClient client in _listener.Listen(CAPACITY))
+            _listener.Open(IP, port);
+
+            foreach (IClient client in _listener.Listen(CAPACITY, token))
             {
                 if (token.IsCancellationRequested)
                 {
