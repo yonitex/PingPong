@@ -4,6 +4,6 @@ namespace Connections.Abstracts
 {
     public interface IListener : IConnection
     {
-        IEnumerable<IConnection> Listen(int capacity);
+        IEnumerable<IClient> Listen(int capacity);
     }
 }
