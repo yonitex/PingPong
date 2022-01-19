@@ -4,9 +4,9 @@ using System.Threading;
 using Common.Abstracts;
 using Connections.Abstracts;
 using System.Collections.Concurrent;
-using Server.Abstracts;
+using ServerImp.Abstracts;
 
-namespace Server
+namespace ServerImp
 {
     public class Server
     {
@@ -43,10 +43,10 @@ namespace Server
         {
             while (!token.IsCancellationRequested)
             {
-                IMessageFactory request = client.Request();
+                IMessage request = client.Request();
                 if (request != null)
                 {
-                    IMessageFactory response = _requestHandler.GetResponse(request);
+                    IMessage response = _requestHandler.GetResponse(request);
                     client.Response(response);
                 }
             }

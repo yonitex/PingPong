@@ -1,9 +1,9 @@
 ﻿using Common.Abstracts;
 
-namespace Server.Abstracts
+namespace ServerImp.Abstracts
 {
     public interface IRequestHandler
     {
-        IMessageFactory GetResponse(IMessageFactory request);
+        IMessage GetResponse(IMessage request);
     }
 }

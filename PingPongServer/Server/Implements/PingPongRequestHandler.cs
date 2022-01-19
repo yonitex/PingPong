@@ -1,7 +1,7 @@
 ﻿using Common.Abstracts;
-using Server.Abstracts;
+using ServerImp.Abstracts;
 
-namespace Server.Implements
+namespace ServerImp.Implements
 {
     public class PingPongRequestHandler : IRequestHandler
     {

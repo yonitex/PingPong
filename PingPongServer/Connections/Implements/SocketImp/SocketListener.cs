@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Common.Abstracts;
 using Connections.Abstracts;
 
 namespace Connections.Implements.SocketImp
@@ -10,6 +11,12 @@ namespace Connections.Implements.SocketImp
     {
         private Socket _listener;
         private IPEndPoint _localEndPoint;
+        private IMessageFactory _messageFactory;
+
+        public SocketListener(IMessageFactory messageFactory)
+        {
+            _messageFactory = messageFactory;
+        }
 
         public void Close()
         {
@@ -24,7 +31,7 @@ namespace Connections.Implements.SocketImp
 
             while (!token.IsCancellationRequested)
             {
-                yield return new SocketClient(_listener.Accept());
+                yield return new SocketClient(_listener.Accept(), _messageFactory);
             }
         }
 

@@ -13,14 +13,10 @@ namespace Connections.Implements.SocketImp
         private Socket _socket;
         private IMessageFactory _messageFactory;
 
-        public SocketClient(IMessageFactory messageFactory)
-        {
-            _messageFactory = messageFactory;
-        }
-
-        public SocketClient(Socket socket)
+        public SocketClient(Socket socket, IMessageFactory messageFactory)
         {
             _socket = socket;
+            _messageFactory = messageFactory;
         }
 
         public void Close()
@@ -38,7 +34,7 @@ namespace Connections.Implements.SocketImp
             _socket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public IMessageFactory Request()
+        public IMessage Request()
         {
             byte[] request = new byte[MAX_BUFFER_SIZE];
             _socket.Receive(request);
@@ -46,15 +42,11 @@ namespace Connections.Implements.SocketImp
             return _messageFactory.Create(request);
         }
 
-        public void Response(IMessageFactory data)
+        public void Response(IMessage response)
         {
-            if (data != null)
+            if (response != null)
             {
-                MemoryStream memoryStream = new MemoryStream();
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                binaryFormatter.Serialize(memoryStream, data);
-
-                _socket.Send(memoryStream.ToArray());
+                _socket.Send(response.GetDataInBytes());
             }
         }
     }
