@@ -11,7 +11,7 @@ namespace ServerImp
     public class Server
     {
         private const string IP = "127.0.0.1";
-        private const int CAPACITY = 10;
+        private const int CAPACITY = 100;
         private IListener _listener;
         private IRequestHandler _requestHandler;
         private ConcurrentBag<Task> _clientHandlers;
