@@ -43,7 +43,8 @@ namespace Server
                 IMessage request = client.Request();
                 if (request != null)
                 {
-                    _requestHandler.Respond(request);
+                    IMessage response = _requestHandler.GetResponse(request);
+                    client.Response(response);
                 }
             }
 
