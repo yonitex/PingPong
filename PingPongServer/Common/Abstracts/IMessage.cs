@@ -2,6 +2,6 @@
 {
     public interface IMessage
     {
-        byte[] GetData();
+        byte[] GetDataInBytes();
     }
 }

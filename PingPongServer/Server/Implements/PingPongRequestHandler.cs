@@ -5,7 +5,7 @@ namespace Server.Implements
 {
     public class PingPongRequestHandler : IRequestHandler
     {
-        public IMessage GetResponse(IMessage request)
+        public IMessageFactory GetResponse(IMessageFactory request)
         {
             return request;
         }

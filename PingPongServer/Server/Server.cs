@@ -43,10 +43,10 @@ namespace Server
         {
             while (!token.IsCancellationRequested)
             {
-                IMessage request = client.Request();
+                IMessageFactory request = client.Request();
                 if (request != null)
                 {
-                    IMessage response = _requestHandler.GetResponse(request);
+                    IMessageFactory response = _requestHandler.GetResponse(request);
                     client.Response(response);
                 }
             }

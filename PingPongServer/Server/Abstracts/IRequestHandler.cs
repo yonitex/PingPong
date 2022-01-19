@@ -4,6 +4,6 @@ namespace Server.Abstracts
 {
     public interface IRequestHandler
     {
-        IMessage GetResponse(IMessage request);
+        IMessageFactory GetResponse(IMessageFactory request);
     }
 }

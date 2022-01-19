@@ -24,7 +24,7 @@ namespace Connections.Implements.SocketImp
 
             while (!token.IsCancellationRequested)
             {
-                yield return _listener.Accept();
+                yield return new SocketClient(_listener.Accept());
             }
         }
 
