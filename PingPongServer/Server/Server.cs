@@ -4,6 +4,7 @@ using System.Threading;
 using Common.Abstracts;
 using Connections.Abstracts;
 using System.Collections.Concurrent;
+using Server.Abstracts;
 
 namespace Server
 {
@@ -12,10 +13,11 @@ namespace Server
         private const string IP = "127.0.0.1";
         private const int CAPACITY = 10;
         private IListener _listener;
-        private ConcurrentBag<IClient> _clients;
+        private IRequestHandler _requestHandler;
+        private ConcurrentBag<Task> _clientHandlers;
         public Server(int port)
         {
-            _clients = new ConcurrentBag<IClient>();
+            _clientHandlers = new ConcurrentBag<Task>();
             _listener.Open(IP, port);
         }
 
@@ -28,9 +30,10 @@ namespace Server
                     break;
                 }
 
-                _clients.Add(client);
-                HandleClient(client, token);
+                _clientHandlers.Add(HandleClient(client, token));
             }
+
+            await Task.WhenAll(_clientHandlers);
         }
 
         private async Task HandleClient(IClient client, CancellationToken token)
@@ -40,9 +43,11 @@ namespace Server
                 IMessage request = client.Request();
                 if (request != null)
                 {
-                    // todo: response handler
+                    _requestHandler.Respond(request);
                 }
             }
+
+            client.Close();
         }
     }
 }
