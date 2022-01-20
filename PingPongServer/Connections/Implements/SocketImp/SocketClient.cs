@@ -1,8 +1,5 @@
-﻿using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using Common.Abstracts;
 using Connections.Abstracts;
 
 namespace Connections.Implements.SocketImp
@@ -25,11 +22,14 @@ namespace Connections.Implements.SocketImp
 
         public void Open(string ip, int port)
         {
-            IPHostEntry ipHost = Dns.GetHostEntry(ip);
-            IPAddress ipAddr = ipHost.AddressList[0];
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddr, port);
+            if (_socket == null)
+            {
+                IPHostEntry ipHost = Dns.GetHostEntry(ip);
+                IPAddress ipAddr = ipHost.AddressList[0];
+                IPEndPoint localEndPoint = new IPEndPoint(ipAddr, port);
 
-            _socket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                _socket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            }
         }
 
         public byte[] Request()

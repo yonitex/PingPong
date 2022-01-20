@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using Common.Abstracts;
 using Connections.Abstracts;
 
 namespace Connections.Implements.SocketImp

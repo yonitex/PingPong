@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Abstracts;
 
 namespace Connections.Abstracts
 {
-    internal class IClient
+    public interface IClient : IConnection
     {
+        void Connect();
+
+        void Send(byte[] request);
+
+        byte[] Receive();
     }
 }
