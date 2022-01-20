@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Converters.Abstracts
+﻿namespace Converters.Abstracts
 {
-    internal class IInputToRequest
+    public interface IInputToRequest<in T>
     {
+        byte[] GetRequest(T input);
     }
 }

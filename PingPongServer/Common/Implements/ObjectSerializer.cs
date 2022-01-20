@@ -4,7 +4,7 @@ using Common.Abstracts;
 
 namespace Common.Implements
 {
-    internal class ObjectSerializer<TObject> : ISerializer<TObject>
+    public class ObjectSerializer<TObject> : ISerializer<TObject>
     {
         public TObject Deserialize(byte[] data)
         {

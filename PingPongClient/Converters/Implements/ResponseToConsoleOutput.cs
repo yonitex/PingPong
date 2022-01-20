@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Converters.Abstracts;
+using Common.Abstracts;
 
 namespace Converters.Implements
 {
-    internal class ResponseToConsoleOutput
+    public class ResponseToConsoleOutput<T> : IResponseToOutput<T>
     {
+        private ISerializer<T> _serializer;
+
+        public ResponseToConsoleOutput(ISerializer<T> serializer)
+        {
+            _serializer = serializer;
+        }
+
+        public T Output(byte[] response)
+        {
+            return _serializer.Deserialize(response);
+        }
     }
 }
