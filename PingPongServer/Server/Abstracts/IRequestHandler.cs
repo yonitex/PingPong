@@ -2,8 +2,8 @@
 
 namespace ServerImp.Abstracts
 {
-    public interface IRequestHandler
+    public interface IRequestHandler<T>
     {
-        IMessage GetResponse(IMessage request);
+        IMessage<T> GetResponse(IMessage<T> request);
     }
 }

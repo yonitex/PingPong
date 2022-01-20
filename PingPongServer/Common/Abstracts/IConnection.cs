@@ -1,4 +1,4 @@
-﻿namespace Connections.Abstracts
+﻿namespace Common.Abstracts
 {
     public interface IConnection
     {

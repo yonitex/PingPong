@@ -43,10 +43,10 @@ namespace ServerImp
         {
             while (!token.IsCancellationRequested)
             {
-                IMessage request = client.Request();
+                var request = client.Request();
                 if (request != null)
                 {
-                    IMessage response = _requestHandler.GetResponse(request);
+                    var response = _requestHandler.GetResponse(request);
                     client.Response(response);
                 }
             }
