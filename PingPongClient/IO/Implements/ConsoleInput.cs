@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IO.Abstracts;
 
 namespace IO.Implements
 {
-    internal class ConsoleInput
+    public class ConsoleInput : IInput
     {
+        public string Read()
+        {
+            return Console.ReadLine();
+        }
     }
 }

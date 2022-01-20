@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IO.Abstracts;
 
 namespace IO.Implements
 {
-    internal class ConsoleOutput
+    internal class ConsoleOutput : IOutput
     {
+        public void Write(string value)
+        {
+            Console.WriteLine(value);
+        }
     }
 }
