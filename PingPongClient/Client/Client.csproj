@@ -4,4 +4,16 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Connections\Connections.csproj" />
+    <ProjectReference Include="..\Converters\Converters.csproj" />
+    <ProjectReference Include="..\IO\IO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\PingPongServer\Common\bin\Release\net5.0\Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

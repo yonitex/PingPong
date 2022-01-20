@@ -43,11 +43,19 @@ namespace ServerImp
         {
             while (!token.IsCancellationRequested)
             {
-                var request = client.Request();
-                if (request != null)
+                try
                 {
-                    var response = _requestHandler.GetResponse(request);
-                    client.Response(response);
+                    var request = client.Request();
+                    if (request != null)
+                    {
+                        var response = _requestHandler.GetResponse(request);
+                        client.Response(response);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    break;
                 }
             }
 

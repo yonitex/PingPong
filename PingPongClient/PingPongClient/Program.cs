@@ -9,7 +9,7 @@ namespace PingPongClient
         private const string IP = "127.0.0.1";
         private const int PORT = 1234;
         private const int TIMEOUT = 100000;
-        static async void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Client<string> client = new Bootstrapper().Bootstrap();
             client.Connect(IP, PORT);
