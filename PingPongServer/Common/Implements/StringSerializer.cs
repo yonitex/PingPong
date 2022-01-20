@@ -3,7 +3,7 @@ using System.Text;
 using Common.Abstracts;
 namespace Common.Implements
 {
-    public class stringSerializer : ISerializer<string>
+    public class StringSerializer : ISerializer<string>
     {
         public string Deserialize(byte[] data)
         {

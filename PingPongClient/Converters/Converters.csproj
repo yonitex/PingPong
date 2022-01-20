@@ -4,4 +4,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Common">
+      <HintPath>..\..\PingPongServer\Common\bin\Release\net5.0\Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

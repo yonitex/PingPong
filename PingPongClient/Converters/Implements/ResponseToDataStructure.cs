@@ -3,11 +3,11 @@ using Common.Abstracts;
 
 namespace Converters.Implements
 {
-    public class ResponseToConsoleOutput<T> : IResponseToOutput<T>
+    public class ResponseToDataStructure<T> : IResponseToOutput<T>
     {
         private ISerializer<T> _serializer;
 
-        public ResponseToConsoleOutput(ISerializer<T> serializer)
+        public ResponseToDataStructure(ISerializer<T> serializer)
         {
             _serializer = serializer;
         }
