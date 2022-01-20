@@ -11,12 +11,6 @@ namespace Connections.Implements.SocketImp
     {
         private Socket _listener;
         private IPEndPoint _localEndPoint;
-        private IMessageFactory _messageFactory;
-
-        public SocketListener(IMessageFactory messageFactory)
-        {
-            _messageFactory = messageFactory;
-        }
 
         public void Close()
         {
@@ -31,7 +25,7 @@ namespace Connections.Implements.SocketImp
 
             while (!token.IsCancellationRequested)
             {
-                yield return new SocketClient(_listener.Accept(), _messageFactory);
+                yield return new SocketClient(_listener.Accept());
             }
         }
 

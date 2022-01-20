@@ -11,12 +11,10 @@ namespace Connections.Implements.SocketImp
     {
         private const int MAX_BUFFER_SIZE = 1024;
         private Socket _socket;
-        private IMessageFactory _messageFactory;
 
-        public SocketClient(Socket socket, IMessageFactory messageFactory)
+        public SocketClient(Socket socket)
         {
             _socket = socket;
-            _messageFactory = messageFactory;
         }
 
         public void Close()
@@ -34,19 +32,19 @@ namespace Connections.Implements.SocketImp
             _socket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
-        public IMessage Request()
+        public byte[] Request()
         {
             byte[] request = new byte[MAX_BUFFER_SIZE];
             _socket.Receive(request);
 
-            return _messageFactory.Create(request);
+            return request;
         }
 
-        public void Response(IMessage response)
+        public void Response(byte[] response)
         {
             if (response != null)
             {
-                _socket.Send(response.GetDataInBytes());
+                _socket.Send(response);
             }
         }
     }

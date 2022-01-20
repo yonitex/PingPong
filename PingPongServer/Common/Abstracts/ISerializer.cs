@@ -1,9 +1,9 @@
 ﻿namespace Common.Abstracts
 {
-    public interface ISerializer<TObject, TData>
+    public interface ISerializer<TObject>
     {
-        TData Serialize(TObject data);
+        byte[] Serialize(TObject data);
 
-        TObject Deserialize(TData data);
+        TObject Deserialize(byte[] data);
     }
 }

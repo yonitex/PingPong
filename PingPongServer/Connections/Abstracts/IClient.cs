@@ -4,8 +4,8 @@ namespace Connections.Abstracts
 {
     public interface IClient : IConnection
     {
-        IMessage Request();
+        byte[] Request();
 
-        void Response(IMessage data);
+        void Response(byte[] data);
     }
 }
