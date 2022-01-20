@@ -1,12 +1,16 @@
 ﻿using Connections.Abstracts;
 using IO.Abstracts;
 using Converters.Abstracts;
+using System.Threading;
+using System;
+using System.Threading.Tasks;
 
 namespace ClientImp
 {
     public class Client<TData>
     {
         private const string INVALID_INPUT = "invalid input";
+        private const string CONNECTION_CLOSED = "connection was closed";
         private const int MAX_BUFFER_SIZE = 1024;
 
         private readonly IClient _client;
@@ -31,6 +35,25 @@ namespace ClientImp
             _parser = parser;
             _inputToRequestConverter = inputToRequestConverter;
             _responseToOutputConverter = responseToOutputConverter;
+        }
+
+        public async Task Run(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    Send();
+                    Receive();
+                }
+                catch (Exception)
+                {
+                    _writer.Write(CONNECTION_CLOSED);
+                    break;
+                }
+            }
+
+            Close();
         }
 
         public void Connect(string ip, int port)
