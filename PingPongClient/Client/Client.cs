@@ -11,7 +11,6 @@ namespace ClientImp
     {
         private const string INVALID_INPUT = "invalid input";
         private const string CONNECTION_CLOSED = "connection was closed";
-        private const int MAX_BUFFER_SIZE = 1024;
 
         private readonly IClient _client;
 
@@ -46,8 +45,9 @@ namespace ClientImp
                     Send();
                     Receive();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     _writer.Write(CONNECTION_CLOSED);
                     break;
                 }
@@ -80,12 +80,13 @@ namespace ClientImp
             else
             {
                 _writer.Write(INVALID_INPUT);
+                Send();
             }
         }
 
         private void Receive()
         {
-            byte[] response = new byte[MAX_BUFFER_SIZE];
+            byte[] response = _client.Receive();
             TData output = _responseToOutputConverter.Output(response);
             _writer.Write(output.ToString());
         }

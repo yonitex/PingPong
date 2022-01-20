@@ -15,7 +15,8 @@ namespace IO.Implements
 
             string[] parameters = input.Split(' ');
             int age;
-            if (parameters.Length != 2 || int.TryParse(parameters[1], out age))
+
+            if (parameters.Length != 2 || !int.TryParse(parameters[1], out age))
             {
                 result = default(Person);
                 return false;

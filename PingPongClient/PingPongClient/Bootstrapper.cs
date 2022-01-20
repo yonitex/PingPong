@@ -9,19 +9,19 @@ namespace PingPongClient
 {
     public class Bootstrapper
     {
-        public Client<string> Bootstrap()
+        public Client<Person> Bootstrap()
         {
             var connection = new SocketClient();
             
             var reader = new ConsoleInput();
             var writer = new ConsoleOutput();
-            var inputParser = new StringParser();
+            var inputParser = new PersonParser();
 
-            var serializer = new StringSerializer();
-            var inputToRequestConverter = new ConsoleInputToRequest<string>(serializer);
-            var responseToOutputConverter = new ResponseToDataStructure<string>(serializer);
+            var serializer = new ObjectSerializer<Person>();
+            var inputToRequestConverter = new ConsoleInputToRequest<Person>(serializer);
+            var responseToOutputConverter = new ResponseToDataStructure<Person>(serializer);
 
-            Client<string> client = new Client<string>(connection,
+            Client<Person> client = new Client<Person>(connection,
                                                        reader,
                                                        writer,
                                                        inputParser,

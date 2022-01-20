@@ -1,4 +1,5 @@
 ﻿using ClientImp;
+using Common.Implements;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace PingPongClient
         private const int TIMEOUT = 100000;
         static async Task Main(string[] args)
         {
-            Client<string> client = new Bootstrapper().Bootstrap();
+            Client<Person> client = new Bootstrapper().Bootstrap();
             client.Connect(IP, PORT);
 
             CancellationTokenSource cts = new CancellationTokenSource();

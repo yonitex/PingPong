@@ -12,11 +12,15 @@ namespace PingPongServer
             CancellationToken cancellationToken = cts.Token;
 
             int port;
+            var server = new Bootstrapper().Bootstrap();
 
-            if (int.TryParse(args[0], out port))
+            if (args != null && args.Length > 0 && int.TryParse(args[0], out port))
             {
-                var server = new Bootstrapper().Bootstrap();
                 Task t = server.RunServer(port, cancellationToken);
+            }
+            else
+            {
+                Task t = server.RunServer(1234, cancellationToken);
             }
 
             bool stop = false;

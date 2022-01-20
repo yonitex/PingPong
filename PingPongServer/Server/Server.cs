@@ -48,13 +48,12 @@ namespace ServerImp
                     var request = client.Request();
                     if (request != null)
                     {
-                        var response = _requestHandler.GetResponse(request);
+                        byte[] response = _requestHandler.GetResponse(request);
                         client.Response(response);
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Console.WriteLine(ex.Message);
                     break;
                 }
             }
