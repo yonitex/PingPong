@@ -23,6 +23,7 @@ namespace IO.Implements
 
             string name = parameters[0];
             result = new Person(name, age);
+            return true;
         }
     }
 }
